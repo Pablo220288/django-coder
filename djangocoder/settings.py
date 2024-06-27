@@ -33,6 +33,8 @@ ALLOWED_HOSTS = [".vercel.app", "127.0.0.1"]
 # Application definition
 
 INSTALLED_APPS = [
+    # Django Admin Interface
+    "admin_interface",
     # Django Apps
     "django.contrib.admin",
     "django.contrib.auth",
@@ -42,7 +44,12 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Local Apps
     "models",
+    # Django Themes Admin
+    "colorfield",
 ]
+
+# Django Themes Admin
+X_FRAME_OPTIONS = "SAMEORIGIN"
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
