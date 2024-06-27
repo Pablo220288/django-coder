@@ -8,6 +8,7 @@ click==8.1.7
 colorama==0.4.6
 cookiecutter==2.6.0
 Django==4.2.13
+django-admin-interface==0.28.8
 idna==3.7
 Jinja2==3.1.4
 markdown-it-py==3.0.0
