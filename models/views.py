@@ -1,25 +1,60 @@
+from django.contrib import messages
 from django.shortcuts import render
 
-from .models import Product
+from .forms import ProductForm
+from .models import About, Product, Testimonial
 
 # Create your views here.
 
 
 def index(request):
-    context = {"products": Product.objects.all()}
+    products = Product.objects.all()[:3]
+    testimonial = Testimonial.objects.all()
+    context = {"products": products, "testimonials": testimonial}
     return render(request, "index.html", context)
 
 
 def shop(request):
-    return render(request, "shop.html")
+    search = request.GET.get("search")
+    if search:
+        context = {"products": Product.objects.filter(name__contains=search)}
+    else:
+        context = {"products": Product.objects.all()}
+    return render(request, "shop.html", context)
 
 
 def about(request):
-    return render(request, "about.html")
+    team = About.objects.all()
+    testimonial = Testimonial.objects.all()
+    context = {"teams": team, "testimonials": testimonial}
+    return render(request, "about.html", context)
 
 
 def service(request):
-    return render(request, "services.html")
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data.get("name")
+            price = form.cleaned_data.get("price")
+            stock = form.cleaned_data.get("stock")
+            category = form.cleaned_data.get("category")
+            image = form.cleaned_data.get("image_url")
+
+            newProduct = Product(
+                name=name, price=price, stock=stock, category=category, image_url=image
+            )
+            newProduct.save()
+            messages.add_message(
+                request=request,
+                level=messages.SUCCESS,
+                message="Product added successfully",
+            )
+            context = {"products": Product.objects.all()}
+            return render(request, "shop.html", context)
+    else:
+        form = ProductForm()
+
+    return render(request, "services.html", {"form": form})
 
 
 def blog(request):
