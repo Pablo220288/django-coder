@@ -890,3 +890,7 @@ textarea {
   border-radius: 50%;
   background: rgba(59, 93, 80, 0.2);
 }
+
+body{
+  overflow-x: hidden;
+}
