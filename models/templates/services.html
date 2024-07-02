@@ -25,7 +25,7 @@
 <div class="row justify-content-between">
 	<div class="col-lg-5">
 		<div class="intro-excerpt">
-			<h1>Services</h1>
+			<h1>Service <br/><span clsas="d-block">Design Studio</span></h1>
 			<p class="mb-4">Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit. Aliquam vulputate velit imperdiet dolor tempor tristique.</p>
 			<p><a href="" class="btn btn-secondary me-2">Shop Now</a><a href="#" class="btn btn-white-outline">Explore</a></p>
 		</div>
@@ -45,26 +45,26 @@
 	  	<div class="block">
 				<div class="row justify-content-center">
 				  <div class="col-md-8 col-lg-8 pb-4">
-					  <div class="row mb-5">
+					  <div class="row mb-2">
               <h2 class="section-title">Add Products</h2>
 					  </div>
             <form method="post">
               {% csrf_token %}
+              <input class="d-none" type="text" name="type" value="Product" />
               <div class="row mb-2">
                 <div class="col-6">
                   <div class="form-group">
                     <div class="form-group">
-                      <label class="text-black" for={{form.name.id_for_label}}>{{form.name.label}}</label>
-                      {{form.name}}
-                      {{form.name.errors}}
+                      <label class="text-black" for={{form.name.id_for_label}}>{{formProduct.name.label}}</label>
+                      {{formProduct.name}}
                     </div>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <div class="form-group">
-                      <label class="text-black" for={{form.category.id_for_label}}>{{form.category.label}}</label>
-                      {{form.category}}
+                      <label class="text-black" for={{form.category.id_for_label}}>{{formProduct.category.label}}</label>
+                      {{formProduct.category}}
                     </div>
                   </div>
                 </div>
@@ -73,30 +73,112 @@
                 <div class="col-6">
                   <div class="form-group">
                     <div class="form-group">
-                      <label class="text-black" for={{form.price.id_for_label}}>{{form.price.label}}</label>
-                      {{form.price}}
+                      <label class="text-black" for={{form.price.id_for_label}}>{{formProduct.price.label}}</label>
+                      {{formProduct.price}}
                     </div>
                   </div>
                 </div>
                 <div class="col-6">
                   <div class="form-group">
                     <div class="form-group">
-                      <label class="text-black" for={{form.stock.id_for_label}}>{{form.stock.label}}</label>
-                      {{form.stock}}
+                      <label class="text-black" for={{form.stock.id_for_label}}>{{formProduct.stock.label}}</label>
+                      {{formProduct.stock}}
                     </div>
                   </div>
                 </div>
               </div>
               <div class="form-group mb-5">
-                <label class="text-black" for={{form.image_url.id_for_label}}>{{form.image_url.label}}</label>
-                {{form.image_url}}
-                {{form.image_url.help_text}}
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formProduct.image_url.label}}</label>
+                {{formProduct.image_url}}
 					    </div>
 					    <input type="submit" class="btn btn-primary-hover-outline" value="Submit" />
             </form>
 				  </div>
 				</div>
-			  </div>
+        <div class="row justify-content-center mt-5">
+				  <div class="col-md-8 col-lg-8 pb-4">
+					  <div class="row mb-2">
+              <h2 class="section-title">Add Personal</h2>
+					  </div>
+            <form method="post">
+              {% csrf_token %}
+              <input class="d-none" type="text" name="type" value="About" />
+              <div class="row mb-2">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.name.id_for_label}}>{{formAbout.first_name.label}}</label>
+                      {{formAbout.first_name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.category.id_for_label}}>{{formAbout.last_name.label}}</label>
+                      {{formAbout.last_name}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formAbout.position.label}}</label>
+                {{formAbout.position}}
+					    </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formAbout.description.label}}</label>
+                {{formAbout.description}}
+                </div>
+              <div class="form-group mb-5">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formAbout.image_url.label}}</label>
+                {{formAbout.image_url}}
+					    </div>
+					    <input type="submit" class="btn btn-primary-hover-outline" value="Submit" />
+            </form>
+				  </div>
+				</div>
+        <div class="row justify-content-center mt-5">
+				  <div class="col-md-8 col-lg-8 pb-4">
+					  <div class="row mb-2">
+              <h2 class="section-title">Add Testimonial</h2>
+					  </div>
+            <form method="post">
+              {% csrf_token %}
+              <input class="d-none" type="text" name="type" value="Testimonial" />
+              <div class="row mb-2">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.name.id_for_label}}>{{formTestimonial.first_name.label}}</label>
+                      {{formTestimonial.first_name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.category.id_for_label}}>{{formTestimonial.last_name.label}}</label>
+                      {{formTestimonial.last_name}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formTestimonial.position.label}}</label>
+                {{formTestimonial.position}}
+					    </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formTestimonial.testimonial.label}}</label>
+                {{formTestimonial.testimonial}}
+                </div>
+              <div class="form-group mb-5">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{formTestimonial.image_url.label}}</label>
+                {{formTestimonial.image_url}}
+					    </div>
+					    <input type="submit" class="btn btn-primary-hover-outline" value="Submit" />
+            </form>
+				  </div>
+				</div>
 			</div>
 	  </div>
 	</div>

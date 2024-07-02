@@ -1,7 +1,7 @@
 from django.contrib import messages
 from django.shortcuts import render
 
-from .forms import ProductForm
+from .forms import AboutForm, ProductForm, TestimonialForm
 from .models import About, Product, Testimonial
 
 # Create your views here.
@@ -31,7 +31,7 @@ def about(request):
 
 
 def service(request):
-    if request.method == "POST":
+    if request.method == "POST" and request.POST.get("type") == "Product":
         form = ProductForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data.get("name")
@@ -51,10 +51,72 @@ def service(request):
             )
             context = {"products": Product.objects.all()}
             return render(request, "shop.html", context)
-    else:
-        form = ProductForm()
+    elif request.method == "POST" and request.POST.get("type") == "About":
+        form = AboutForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data.get("first_name")
+            last_name = form.cleaned_data.get("last_name")
+            position = form.cleaned_data.get("position")
+            description = form.cleaned_data.get("description")
+            image = form.cleaned_data.get("image_url")
 
-    return render(request, "services.html", {"form": form})
+            newAbout = About(
+                first_name=first_name,
+                last_name=last_name,
+                position=position,
+                description=description,
+                image_url=image,
+            )
+            newAbout.save()
+            messages.add_message(
+                request=request,
+                level=messages.SUCCESS,
+                message="Personal added successfully",
+            )
+            team = About.objects.all()
+            testimonial = Testimonial.objects.all()
+            context = {"teams": team, "testimonials": testimonial}
+            return render(request, "about.html", context)
+    elif request.method == "POST" and request.POST.get("type") == "Testimonial":
+        form = TestimonialForm(request.POST)
+        if form.is_valid():
+            first_name = form.cleaned_data.get("first_name")
+            last_name = form.cleaned_data.get("last_name")
+            position = form.cleaned_data.get("position")
+            testimonial = form.cleaned_data.get("testimonial")
+            image = form.cleaned_data.get("image_url")
+
+            newTestimonial = Testimonial(
+                first_name=first_name,
+                last_name=last_name,
+                position=position,
+                testimonial=testimonial,
+                image_url=image,
+            )
+            newTestimonial.save()
+            messages.add_message(
+                request=request,
+                level=messages.SUCCESS,
+                message="Testimonial added successfully",
+            )
+            team = About.objects.all()
+            testimonial = Testimonial.objects.all()
+            context = {"teams": team, "testimonials": testimonial}
+            return render(request, "about.html", context)
+    else:
+        formProduct = ProductForm()
+        formAbout = AboutForm()
+        formTestimonial = TestimonialForm()
+
+    return render(
+        request,
+        "services.html",
+        {
+            "formProduct": formProduct,
+            "formAbout": formAbout,
+            "formTestimonial": formTestimonial,
+        },
+    )
 
 
 def blog(request):
