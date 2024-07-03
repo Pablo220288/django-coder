@@ -1,11 +1,9 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="https://www.djangoproject.com/" target="blank"><img src="https://imgs.search.brave.com/99KK7YNxUj_1GuT3P7cjT-62tFuzbMCCZRC5ITRA8-k/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zZWVr/bG9nby5jb20vaW1h/Z2VzL0QvZGphbmdv/LWxvZ28tNEM1RUNG/NzAzNi1zZWVrbG9n/by5jb20ucG5n" width="200" alt="Django Logo" /></a>
+  <a href="https://www.python.org/" target="blank"><img src="https://imgs.search.brave.com/Gc4o0TZByHDXOrUog0t60tOvt-BmVp3pOLjo8FdPnCM/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHMuc3RpY2twbmcu/Y29tL2ltYWdlcy81/ODQ4MTUyZmNlZjEw/MTRjMGI1ZTQ5Njcu/cG5n" width="200" alt="Pyhton Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+<p align="center"></p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
@@ -22,15 +20,34 @@
   <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
   [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
 
-## Description
+# Introducción
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Bienvenido a mi ecommerce, un proyecto que utiliza Django para crear una tienda en línea. En este README, te proporcionamos información sobre cómo utilizar nuestro ecommerce y cómo contribuir al proyecto.
 
-## Installation
+## **Instalación**
+
+Para instalar nuestro ecommerce, necesitarás tener Python y Django instalados en tu máquina local. Puedes seguir los siguientes pasos para instalarlos:
+
+* Instala Python desde el sitio web oficial de Python.
+* Instala Django utilizando pip:
 
 ```bash
-$ npm install
+$ pip install django
 ```
+
+## **Configuración**
+
+Para configurar nuestro ecommerce, necesitarás crear un archivo `settings.py` en la raíz del proyecto. En este archivo, puedes configurar variables como la base de datos, la ruta de la tienda y la configuración de seguridad.
+
+## **Uso**
+
+Para utilizar nuestro ecommerce, puedes seguir los siguientes pasos:
+
+* Inicia el servidor de desarrollo: `python manage.py runserver`
+```bash
+$ python manage.py runserver
+```
+* Accede a la tienda en tu navegador: `http://localhost:8000`
 
 ## Running the app
 
@@ -71,3 +88,6 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 ## License
 
 Nest is [MIT licensed](LICENSE).
+
+[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
+[circleci-url]: https://circleci.com/gh/nestjs/nest
