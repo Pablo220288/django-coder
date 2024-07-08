@@ -1,0 +1,54 @@
+{% extends 'index.html' %} 
+
+{% block static %} 
+	{% load static %} 
+{% endblock static %} 
+
+{% block titleanddescription %} 
+	<title>{{title}}</title>
+	<meta name="description" content="" />
+{% endblock titleanddescription %}
+
+{% block nav %}
+  <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+  <li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+  <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+
+  {% if user.is_authenticated %}
+    <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+    <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
+    <li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
+  {% endif %}
+
+  <li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
+
+{% endblock nav %} 
+
+{% block hero %}
+
+{% endblock hero %} 
+
+{% block content %}
+	<!-- Start Why Choose Us Section -->
+	<div class="untree_co-section">
+		<div class="container">
+	  	<div class="block">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 col-lg-8 pb-4">
+            {% if messages %}
+              {% for message in messages %}
+                <li {% if message.tags %} class="alert alert-{{message.tags}}"{% endif %}>{{message}}</li>
+              {% endfor %}
+            {% endif %}
+				    <div class="col-md-8 col-lg-8 pb-4">
+					    <div class="row mb-2">
+                <h2 class="section-title">404 Error</h2>
+					    </div>
+				    </div>
+          </div>
+        </div>
+			</div>
+	  </div>
+	</div>
+	<!-- End Why Choose Us Section -->
+{% endblock content %}

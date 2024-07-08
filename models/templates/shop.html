@@ -15,32 +15,39 @@
 	  <a class="nav-link" href="{% url 'shop' %}">Shop</a>
 	</li>
 	<li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
-	<li><a class="nav-link" href="{% url 'service' %}">Services</a></li>
-	<li><a class="nav-link" href="{% url 'blog' %}">Blog</a></li>
+	{% if user.is_authenticated %}
+		<li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+		<li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
+		<li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
+  	{% endif %}
 	<li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
 {% endblock nav %} 
 
 {% block hero %}
-	<div class="row justify-content-between">
-	  <div class="col-lg-5">
-	    <div class="intro-excerpt">
-			<h1>Shop <br/><span clsas="d-block">Design Studio</span></h1>
-	      	<p class="mb-4">
-	      	  Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit.
-	      	  Aliquam vulputate velit imperdiet dolor tempor tristique.
-	      	</p>
-	      	<p>
-	      	  <a href="" class="btn btn-secondary me-2">Shop Now</a
-	      	  ><a href="#" class="btn btn-white-outline">Explore</a>
-	      	</p>
-	    </div>
-	  </div>
-	  <div class="col-lg-7">
-	    <div class="hero-img-wrap">
-	      <img src="{% static 'images/product-5.png' %}" class="img-fluid" />
-	    </div>
-	  </div>
+<div class="hero">
+	<div class="container">
+		<div class="row justify-content-between">
+		  <div class="col-lg-5">
+		    <div class="intro-excerpt">
+				<h1>Shop <br/><span clsas="d-block">Design Studio</span></h1>
+		      	<p class="mb-4">
+		      	  Donec vitae odio quis nisl dapibus malesuada. Nullam ac aliquet velit.
+		      	  Aliquam vulputate velit imperdiet dolor tempor tristique.
+		      	</p>
+		      	<p>
+		      	  <a href="" class="btn btn-secondary me-2">Shop Now</a
+		      	  ><a href="#" class="btn btn-white-outline">Explore</a>
+		      	</p>
+		    </div>
+		  </div>
+		  <div class="col-lg-7">
+		    <div class="hero-img-wrap">
+		      <img src="{% static 'images/product-5.png' %}" class="img-fluid" />
+		    </div>
+		  </div>
+		</div>
 	</div>
+</div>
 {% endblock hero %} 
 
 {% block content %}

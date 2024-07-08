@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
   <head>
-    {% block static %} 
-      {% load static %} 
-    {% endblock static %}
+    {% block static %} {% load static %} {% endblock static %}
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -57,24 +55,64 @@
             </li>
             <li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
             <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
-            <li><a class="nav-link" href="{% url 'service' %}">Services</a></li>
-            <li><a class="nav-link" href="{% url 'blog' %}">Blog</a></li>
+
+            {% if user.is_authenticated %}
+            <li>
+              <a class="nav-link" href="{% url 'products' %}">Products</a>
+            </li>
+            <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
+            <li>
+              <a class="nav-link" href="{% url 'testimonials' %}"
+                >Testimonials</a
+              >
+            </li>
+            {% endif %}
+
             <li>
               <a class="nav-link" href="{% url 'contact' %}">Contact us</a>
             </li>
             {% endblock nav %}
           </ul>
-
+          {% if user.is_authenticated %}
           <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
             <li>
-              <a class="nav-link" href="/admin" target=_blank
-                ><img src="{% static 'images/user.svg' %}"
-              /></a>
+              <a class="nav-link" href="" target="_blank">
+                <p class="nav-name">{{user.get_full_name}}</p>
+              </a>
             </li>
+          </ul>
+          {% endif %}
+          <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
+            {% if user.is_authenticated %}
             <li>
-              <a class="nav-link" href="{% url 'cart' %}"
-                ><img src="{% static 'images/cart.svg' %}"
-              /></a>
+              <a class="nav-link" href="{% url 'logout' %}">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  class="icon-logout"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M13.5 6H5.25A2.25 2.25 0 0 0 3 8.25v10.5A2.25 2.25 0 0 0 5.25 21h10.5A2.25 2.25 0 0 0 18 18.75V10.5m-10.5 6L21 3m0 0h-5.25M21 3v5.25"
+                  />
+                </svg>
+              </a>
+            </li>
+            {% else %}
+            <li>
+              <a class="nav-link" href="{% url 'login' %}">
+                <img src="{% static 'images/user.svg' %}" />
+              </a>
+            </li>
+            {% endif %}
+            <li>
+              <a class="nav-link" href="{% url 'cart' %}">
+                <img src="{% static 'images/cart.svg' %}" />
+              </a>
             </li>
           </ul>
         </div>
@@ -83,9 +121,9 @@
     <!-- End Header/Navigation -->
 
     <!-- Start Hero Section -->
+    {% block hero %}
     <div class="hero">
       <div class="container">
-        {% block hero %}
         <div class="row justify-content-between">
           <div class="col-lg-5">
             <div class="intro-excerpt">
@@ -108,9 +146,9 @@
             </div>
           </div>
         </div>
-        {% endblock hero %}
       </div>
     </div>
+    {% endblock hero %}
     <!-- End Hero Section -->
 
     {% block content %}
@@ -389,24 +427,33 @@
               </div>
               <div class="testimonial-slider">
                 {% for testimonial in testimonials %}
-								<div class="item">
-									<div class="row justify-content-center">
-										<div class="col-lg-8 mx-auto">
-											<div class="testimonial-block text-center">
-												<blockquote class="mb-5">
-													<p>&ldquo;{{testimonial.testimonial}}&rdquo;</p>
-												</blockquote>
-												<div class="author-info">
-													<div class="author-pic">
-														<img src="{% static 'images/'|add:testimonial.image_url %}" alt="Maria Jones" class="img-fluid">
-													</div>
-													<h3 class="font-weight-bold">{{testimonial.first_name}} {{ testimonial.last_name}}</h3>
-													<span class="position d-block mb-3">{{testimonial.position}}</span>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>  
+                <div class="item">
+                  <div class="row justify-content-center">
+                    <div class="col-lg-8 mx-auto">
+                      <div class="testimonial-block text-center">
+                        <blockquote class="mb-5">
+                          <p>&ldquo;{{testimonial.testimonial}}&rdquo;</p>
+                        </blockquote>
+                        <div class="author-info">
+                          <div class="author-pic">
+                            <img
+                              src="{% static 'images/'|add:testimonial.image_url %}"
+                              alt="Maria Jones"
+                              class="img-fluid"
+                            />
+                          </div>
+                          <h3 class="font-weight-bold">
+                            {{testimonial.first_name}} {{
+                            testimonial.last_name}}
+                          </h3>
+                          <span class="position d-block mb-3"
+                            >{{testimonial.position}}</span
+                          >
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
                 {% endfor %}
               </div>
             </div>
@@ -630,5 +677,6 @@
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     <script src="{% static 'js/tiny-slider.js' %}"></script>
     <script src="{% static 'js/custom.js' %}"></script>
+    <script src="{% static 'js/index.js' %}"></script>
   </body>
 </html>

@@ -1,0 +1,139 @@
+
+{% extends 'index.html' %} 
+
+{% block static %} 
+	{% load static %} 
+{% endblock static %} 
+
+{% block titleanddescription %} 
+	<title>Furni Service</title>
+	<meta name="description" content="" />
+{% endblock titleanddescription %}
+
+{% block nav %}
+	<li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+	<li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+	<li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+  <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+  <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
+	<li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
+	<li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
+{% endblock nav %} 
+
+{% block hero %}
+
+{% endblock hero %} 
+
+{% block content %}
+	<!-- Start Why Choose Us Section -->
+	<div class="untree_co-section">
+		<div class="container">
+	  	<div class="block">
+        {% if product %}
+				  <div class="row justify-content-center mb-5">
+            <div class="row justify-content-center mb-5">
+              <div class="col-md-8 col-lg-8 pb-4">
+                <div class="title-table" >
+                  <h2 class="section-title">Delete Product</h2>
+                </div>
+                <p>Are you sure you want to delete this product?</p>
+                <table>
+                  <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Price</th>
+                    <th>Stock</th>
+                  </tr>
+                  <tr>
+                    <td>{{object.id}}</td>
+                    <td><img class="img-table" src="{% static 'images/'|add:object.image_url %}" alt="" /></td>
+                    <td>{{object.name}}</td>
+                    <td>{{object.category}}</td>
+                    <td>{{object.price}}</td>
+                    <td>{{object.stock}}</td>
+                  </tr>
+                </table>
+                <div class="formDeleteButton mt-3">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Delete" />
+                  </form>
+                  <a type="button" class="btn btn-primary-hover-outline" href="{% url 'products' %}">Cancel<a/>
+                </div>
+              </div>
+            </div>
+				  </div>
+        {% endif %}
+        {% if about %}
+				  <div class="row justify-content-center mb-5">
+            <div class="row justify-content-center mb-5">
+              <div class="col-md-8 col-lg-8 pb-4">
+                <div class="title-table" >
+                  <h2 class="section-title">Delete About</h2>
+                </div>
+                <p>Are you sure you want to delete this About?</p>
+                <table>
+                  <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                  </tr>
+                  <tr>
+                    <td>{{object.id}}</td>
+                    <td><img class="img-table" src="{% static 'images/'|add:object.image_url %}" alt="" /></td>
+                    <td>{{object.first_name}} {{object.last_name}}</td>
+                    <td>{{object.position}}</td>
+                  </tr>
+                </table>
+                <div class="formDeleteButton mt-3">
+                  <form method="POST"">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Delete" />
+                  </form>
+                  <a type="button" class="btn btn-primary-hover-outline" href="{% url 'abouts' %}">Cancel<a/>
+                </div>
+              </div>
+            </div>
+				  </div>
+        {% endif %}
+        {% if testimonial %}
+				  <div class="row justify-content-center mb-5">
+            <div class="row justify-content-center mb-5">
+              <div class="col-md-8 col-lg-8 pb-4">
+                <div class="title-table" >
+                  <h2 class="section-title">Delete Testimonial</h2>
+                </div>
+                <p>Are you sure you want to delete this Testimonial?</p>
+                <table>
+                  <tr>
+                    <th>ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                  </tr>
+                  <tr>
+                    <td>{{object.id}}</td>
+                    <td><img class="img-table" src="{% static 'images/'|add:object.image_url %}" alt="" /></td>
+                    <td>{{object.first_name}} {{object.last_name}}</td>
+                    <td>{{object.position}}</td>
+                  </tr>
+                </table>
+                <div class="formDeleteButton mt-3">
+                  <form method="POST">
+                    {% csrf_token %}
+                    <input type="submit" class="btn btn-primary" value="Delete" />
+                  </form>
+                  <a type="button" class="btn btn-primary-hover-outline" href="{% url 'testimonials' %}">Cancel<a/>
+                </div>
+              </div>
+            </div>
+				  </div>
+        {% endif %}
+			</div>
+	  </div>
+	</div>
+	<!-- End Why Choose Us Section -->
+{% endblock content %}

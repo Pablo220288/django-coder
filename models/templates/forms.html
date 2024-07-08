@@ -1,0 +1,184 @@
+
+{% extends 'index.html' %} 
+
+{% block static %} 
+	{% load static %} 
+{% endblock static %} 
+
+{% block titleanddescription %} 
+	<title>Furni Service</title>
+	<meta name="description" content="" />
+{% endblock titleanddescription %}
+
+{% block nav %}
+	<li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+	<li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+	<li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+  <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+  <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
+	<li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
+	<li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
+{% endblock nav %} 
+
+{% block hero %}
+
+{% endblock hero %} 
+
+{% block content %}
+	<!-- Start Why Choose Us Section -->
+	<div class="untree_co-section">
+		<div class="container">
+	  	<div class="block">
+        {% if product %}
+				  <div class="row justify-content-center mb-5">
+				    <div class="col-md-8 col-lg-8 pb-4">
+					    <div class="row mb-2">
+                <h2 class="section-title">Add Products</h2>
+					    </div>
+              <form method="post">
+                {% csrf_token %}
+                <input class="d-none" type="text" name="type" value="Product" />
+                <input class="d-none" type="text" name="action" value="{{action}}" />
+                <div class="row mb-2">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label class="text-black" for={{form.name.id_for_label}}>{{form.name.label}}</label>
+                        {{form.name}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label class="text-black" for={{form.category.id_for_label}}>{{form.category.label}}</label>
+                        {{form.category}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row mb-2">
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label class="text-black" for={{form.price.id_for_label}}>{{form.price.label}}</label>
+                        {{form.price}}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-6">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <label class="text-black" for={{form.stock.id_for_label}}>{{form.stock.label}}</label>
+                        {{form.stock}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group mb-5">
+                  <label class="text-black" for={{form.image_url.id_for_label}}>{{form.image_url.label}}</label>
+                  {{form.image_url}}
+					      </div>
+					      <input type="submit" class="btn btn-primary" value="Submit" />
+                <a type="button" class="btn btn-primary-hover-outline" href="{% url 'products' %}">Cancel<a/>
+              </form>
+				    </div>
+				  </div>
+        {% endif %}
+        {% if about %}
+          <div class="row justify-content-center mb-5">
+				  <div class="col-md-8 col-lg-8 pb-4">
+					  <div class="row mb-2">
+              <h2 class="section-title">Add Personal</h2>
+					  </div>
+            <form method="post">
+              {% csrf_token %}
+              <input class="d-none" type="text" name="type" value="About" />
+              <input class="d-none" type="text" name="action" value="{{action}}" />
+              <div class="row mb-2">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{formAbout.first_name.id_for_label}}>{{form.first_name.label}}</label>
+                      {{form.first_name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.last_name.id_for_label}}>{{form.last_name.label}}</label>
+                      {{form.last_name}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.position.id_for_label}}>{{form.position.label}}</label>
+                {{form.position}}
+					    </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.description.id_for_label}}>{{form.description.label}}</label>
+                {{form.description}}
+                </div>
+              <div class="form-group mb-5">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{form.image_url.label}}</label>
+                {{form.image_url}}
+					    </div>
+					    <input type="submit" class="btn btn-primary" value="Submit" />
+              <a type="button" class="btn btn-primary-hover-outline" href="{% url 'abouts' %}">Cancel<a/>
+            </form>
+				  </div>
+				  </div>
+        {% endif %}
+        {% if testimonial %}
+          <div class="row justify-content-center mb-5">
+				  <div class="col-md-8 col-lg-8 pb-4">
+					  <div class="row mb-2">
+              <h2 class="section-title">Add Testimonial</h2>
+					  </div>
+            <form method="post">
+              {% csrf_token %}
+              <input class="d-none" type="text" name="type" value="Testimonial" />
+              <input class="d-none" type="text" name="action" value="{{action}}" />
+              <div class="row mb-2">
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.name.id_for_label}}>{{form.first_name.label}}</label>
+                      {{form.first_name}}
+                    </div>
+                  </div>
+                </div>
+                <div class="col-6">
+                  <div class="form-group">
+                    <div class="form-group">
+                      <label class="text-black" for={{form.category.id_for_label}}>{{form.last_name.label}}</label>
+                      {{form.last_name}}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{form.position.label}}</label>
+                {{form.position}}
+					    </div>
+              <div class="form-group mb-2">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{form.testimonial.label}}</label>
+                {{form.testimonial}}
+                </div>
+              <div class="form-group mb-5">
+                <label class="text-black" for={{form.image_url.id_for_label}}>{{form.image_url.label}}</label>
+                {{form.image_url}}
+					    </div>
+					    <input type="submit" class="btn btn-primary" value="Submit" />
+              <a type="button" class="btn btn-primary-hover-outline" href="{% url 'testimonials' %}">Cancel<a/>
+            </form>
+				  </div>
+				  </div>
+        {% endif %}
+			</div>
+	  </div>
+	</div>
+	<!-- End Why Choose Us Section -->
+{% endblock content %}

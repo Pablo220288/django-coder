@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 from .models import About, Product, Testimonial
 
@@ -104,6 +106,7 @@ class AboutForm(forms.ModelForm):
             ),
         }
 
+
 class TestimonialForm(forms.ModelForm):
 
     class Meta:
@@ -150,6 +153,79 @@ class TestimonialForm(forms.ModelForm):
                     "id": "image_url",
                     "name": "image_url",
                     "placeholder": "About Image URL",
+                }
+            ),
+        }
+
+
+class RegisterForm(UserCreationForm):
+    email = forms.EmailField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "id": "email",
+                "name": "email",
+                "placeholder": "Enter email",
+            }
+        ),
+    )
+    password1 = forms.CharField(
+        label="Password",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "password1",
+                "name": "password1",
+                "placeholder": "Enter Password",
+            }
+        ),
+    )
+    password2 = forms.CharField(
+        label="Confirm Password",
+        widget=forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "password2",
+                "name": "password2",
+                "placeholder": "Enter Password Again",
+            }
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = (
+            "username",
+            "email",
+            "first_name",
+            "last_name",
+            "password1",
+            "password2",
+        )
+        widgets = {
+            "username": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "username",
+                    "name": "username",
+                    "placeholder": "Username",
+                }
+            ),
+            "first_name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "username",
+                    "name": "username",
+                    "placeholder": "Enter First Name",
+                }
+            ),
+            "last_name": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "username",
+                    "name": "username",
+                    "placeholder": "Enter Last Name",
                 }
             ),
         }
