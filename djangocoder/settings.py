@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-c$$z$fgmb(m#jt#g&53izb-#lhrh3d@-6dnx17vqt!_0e%y+j_"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ADD vercel.app and 127.0.0.1
 ALLOWED_HOSTS = [".vercel.app", "127.0.0.1"]
@@ -136,7 +136,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, "models/static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "models/static")
 
 # ADD config static files in DEBUG mode false
-STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
+# STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
