@@ -9,6 +9,7 @@ urlpatterns = [
     path("home/", index, name="home"),
     path("shop/", shop, name="shop"),
     path("about/", about, name="about"),
+    path("contact/", contact, name="contact"),
     # path Login
     path("login/", login_view, name="login"),
     path("logout/", logout_view, name="logout"),
@@ -36,12 +37,26 @@ urlpatterns = [
         TestimonialDelete.as_view(),
         name="testimonialDelete",
     ),
+    # path Services
+    path("services/", Services.as_view(), name="services"),
+    path("service/create/", ServiceCreate.as_view(), name="serviceCreate"),
+    path(
+        "service/update/<int:pk>",
+        ServiceUpdate.as_view(),
+        name="serviceUpdate",
+    ),
+    path(
+        "service/delete/<int:pk>",
+        ServiceDelete.as_view(),
+        name="serviceDelete",
+    ),
     # Delete
     path("delete/<str:type>/<str:id>/", delete, name="delete"),
-    path("service/", Services.as_view(), name="service"),
-    path("forms/<str:type>/<str:action>/<str:id>/", forms, name="forms"),
-    path("blog/", blog, name="blog"),
-    path("contact/", contact, name="contact"),
+    # Profile
+    path("profile/", profile, name="profile"),
+    path("change-password/", ChangePasswordView.as_view(), name="changePassword"),
+    path("change-avatar/", avatar_change, name="changeAvatar"),
+    # Cart
     path("cart/", cart, name="cart"),
     path("checkout/", checkout, name="checkout"),
 ]

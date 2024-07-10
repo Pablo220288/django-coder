@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db import models
 
 # Create your models here.
@@ -48,3 +49,23 @@ class Testimonial(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+
+class Service(models.Model):
+    title = models.CharField(max_length=100)
+    description = models.TextField(default="")
+    icon_url = models.CharField(max_length=2083, default="")
+
+    class Meta:
+        verbose_name_plural = "Services"
+        verbose_name = "Service"
+
+    def __str__(self):
+        return f"{self.title}"
+
+
+class Avatar(models.Model):
+    image = models.ImageField(upload_to="avatars")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user} {self.image}"

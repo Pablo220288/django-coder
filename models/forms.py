@@ -1,10 +1,14 @@
 from django import forms
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import (
+    PasswordChangeForm,
+    UserChangeForm,
+    UserCreationForm,
+)
 from django.contrib.auth.models import User
 
-from .models import About, Product, Testimonial
+from .models import About, Avatar, Product, Service, Testimonial
 
-# Form Products
+# Forms
 
 
 class ProductForm(forms.ModelForm):
@@ -158,6 +162,39 @@ class TestimonialForm(forms.ModelForm):
         }
 
 
+class ServiceForm(forms.ModelForm):
+
+    class Meta:
+        model = Service
+        fields = "__all__"
+        widgets = {
+            "title": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "title",
+                    "name": "title",
+                    "placeholder": "Service Title",
+                }
+            ),
+            "description": forms.Textarea(
+                attrs={
+                    "class": "form-control",
+                    "id": "description",
+                    "name": "description",
+                    "placeholder": "Service Description",
+                }
+            ),
+            "icon_url": forms.TextInput(
+                attrs={
+                    "class": "form-control",
+                    "id": "icon_url",
+                    "name": "icon_url",
+                    "placeholder": "Service Icon",
+                }
+            ),
+        }
+
+
 class RegisterForm(UserCreationForm):
     email = forms.EmailField(
         required=True,
@@ -229,3 +266,87 @@ class RegisterForm(UserCreationForm):
                 }
             ),
         }
+
+
+class ProfileForm(UserChangeForm):
+    email = forms.EmailField(
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "id": "email",
+                "name": "email",
+                "placeholder": "Enter email",
+            }
+        ),
+    )
+    first_name = forms.CharField(
+        label="Nombre",
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "id": "first_name",
+                "name": "first_name",
+                "placeholder": "Enter first name",
+            }
+        ),
+    )
+    last_name = forms.CharField(
+        label="Apellido",
+        max_length=50,
+        required=True,
+        widget=forms.TextInput(
+            attrs={
+                "class": "form-control",
+                "id": "last_name",
+                "name": "last_name",
+                "placeholder": "Enter last name",
+            }
+        ),
+    )
+
+    class Meta:
+        model = User
+        fields = ["email", "first_name", "last_name"]
+
+
+class MyPasswordChangeForm(PasswordChangeForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["old_password"].widget = forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "old_password",
+                "name": "old_password",
+                "placeholder": "Enter old password",
+            }
+        )
+        self.fields["new_password1"].widget = forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "new_password1",
+                "name": "new_password1",
+                "placeholder": "Enter new password",
+            }
+        )
+        self.fields["new_password2"].widget = forms.PasswordInput(
+            attrs={
+                "class": "form-control",
+                "id": "new_password2",
+                "name": "new_password2",
+                "placeholder": "Enter new password again",
+            }
+        )
+
+
+class AvatarForm(forms.ModelForm):
+
+    image = forms.ImageField(
+        required=True,
+    )
+
+    class Meta:
+        model = Avatar
+        fields = ["image"]

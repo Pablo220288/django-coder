@@ -28,10 +28,7 @@
 
   <body>
     <!-- Start Header/Navigation -->
-    <nav
-      class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark"
-      arial-label="Furni navigation bar"
-    >
+    <nav class="custom-navbar navbar navbar navbar-expand-md navbar-dark bg-dark" arial-label="Furni navigation bar">
       <div class="container">
         <a class="navbar-brand" href="{% url 'home' %}">Furni<span>.</span></a>
 
@@ -57,15 +54,10 @@
             <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
 
             {% if user.is_authenticated %}
-            <li>
-              <a class="nav-link" href="{% url 'products' %}">Products</a>
-            </li>
+            <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
             <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
-            <li>
-              <a class="nav-link" href="{% url 'testimonials' %}"
-                >Testimonials</a
-              >
-            </li>
+            <li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
+            <li><a class="nav-link" href="{% url 'services' %}">Services</a></li>
             {% endif %}
 
             <li>
@@ -76,7 +68,7 @@
           {% if user.is_authenticated %}
           <ul class="custom-navbar-cta navbar-nav mb-2 mb-md-0 ms-5">
             <li>
-              <a class="nav-link" href="" target="_blank">
+              <a class="nav-link" href="{% url 'profile' %}">
                 <p class="nav-name">{{user.get_full_name}}</p>
               </a>
             </li>
@@ -615,9 +607,9 @@
             <div class="row links-wrap">
               <div class="col-6 col-sm-6 col-md-3">
                 <ul class="list-unstyled">
+                  <li><a href="{% url 'home' %}">Home</a></li>
+                  <li><a href="{% url 'shop' %}">Shop</a></li>
                   <li><a href="{% url 'about' %}">About us</a></li>
-                  <li><a href="{% url 'service' %}">Services</a></li>
-                  <li><a href="{% url 'blog' %}">Blog</a></li>
                   <li><a href="{% url 'contact' %}">Contact us</a></li>
                 </ul>
               </div>

@@ -6,7 +6,7 @@
 {% endblock static %} 
 
 {% block titleanddescription %} 
-	<title>Furni Login</title>
+	<title>Furni Avatar</title>
 	<meta name="description" content="" />
 {% endblock titleanddescription %}
 
@@ -19,7 +19,6 @@
     <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
     <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
     <li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
-    <li><a class="nav-link" href="{% url 'services' %}">Services</a></li>
   {% endif %}
 
   <li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
@@ -44,33 +43,24 @@
             {% endif %}
 				    <div class="col-md-8 col-lg-8 pb-4">
 					    <div class="row mb-2">
-                <h2 class="section-title">Login</h2>
+                <div class="group-avatar">
+                  <h2 class="section-title">Change Avatar</h2>
+                </div>
 					    </div>
-              <form method="post">
+              <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                <div class="row mb-3">
+                <div class="row mb-4">
                   <div class="col-6">
                     <div class="form-group">
                       <div class="form-group">
-                        <label class="text-black" for={{form.name.id_for_label}}>{{form.username.label}}</label>
-                        {{form.username}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="form-group">
-                      <div class="form-group">
-                        <label class="text-black" for={{form.category.id_for_label}}>{{form.password.label}}</label>
-                        {{form.password}}
+                        {{form.as_table}}
                       </div>
                     </div>
                   </div>
                 </div>
 					      <input type="submit" class="btn btn-primary" value="Submit" />
-                <a type="button" class="btn btn-primary-hover-outline" href="{% url 'home' %}">Cancel<a/>
+                <a type="button" class="btn btn-primary-hover-outline" href="{% url 'profile' %}">Cancel</a>
               </form>
-              <p class="text-black mt-4">Are you new here?</p>
-              <a type="button" class="btn btn-primary" href="{% url 'register' %}">Register</a>
 				    </div>
           </div>
         </div>

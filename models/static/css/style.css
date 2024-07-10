@@ -1017,3 +1017,23 @@ th {
   text-transform: capitalize;
   margin-bottom: 0;
 }
+
+.align-end {
+  align-items: end;
+}
+
+.group-avatar {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+}
+
+.input-avatar-profile {
+  display: none;
+}
+
+.img-avatar-profile {
+  width: 80px;
+  cursor: pointer;
+  border-radius: 50%;
+}

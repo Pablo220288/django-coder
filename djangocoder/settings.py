@@ -135,6 +135,11 @@ STATIC_URL = "models/static/"
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "models/static"),)
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles_build", "models/static")
 
+# ADD config media files
+MEDIA_URL = "/media/"
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
 # ADD config static files in DEBUG mode false
 # STATICFILES_STORAGE = "django.contrib.staticfiles.storage.StaticFilesStorage"
 

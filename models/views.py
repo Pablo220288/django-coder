@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth.views import PasswordChangeView
 from django.shortcuts import redirect, render
 
 # Create Base View
@@ -18,8 +19,17 @@ from django.views.generic import (
     UpdateView,
 )
 
-from .forms import AboutForm, ProductForm, RegisterForm, TestimonialForm
-from .models import About, Product, Testimonial
+from .forms import (
+    AboutForm,
+    AvatarForm,
+    MyPasswordChangeForm,
+    ProductForm,
+    ProfileForm,
+    RegisterForm,
+    ServiceForm,
+    TestimonialForm,
+)
+from .models import About, Avatar, Product, Service, Testimonial
 
 # Create your views here.
 
@@ -61,207 +71,6 @@ def service(request):
             "testimonials": testimonial,
         },
     )
-
-
-def forms(request, type, action, id):
-    if request.method == "POST" and request.POST.get("type") == "Product":
-        if request.POST.get("action") == "update":
-            product = Product.objects.get(id=id)
-            form = ProductForm(request.POST)
-            if form.is_valid():
-                product.name = form.cleaned_data.get("name")
-                product.price = form.cleaned_data.get("price")
-                product.stock = form.cleaned_data.get("stock")
-                product.category = form.cleaned_data.get("category")
-                product.image_url = form.cleaned_data.get("image_url")
-                product.save()
-                messages.add_message(
-                    request=request,
-                    level=messages.SUCCESS,
-                    message="Product updated successfully",
-                )
-                context = {"products": Product.objects.all()}
-                return render(request, "shop.html", context)
-        else:
-            form = ProductForm(request.POST)
-            if form.is_valid():
-                name = form.cleaned_data.get("name")
-                price = form.cleaned_data.get("price")
-                stock = form.cleaned_data.get("stock")
-                category = form.cleaned_data.get("category")
-                image = form.cleaned_data.get("image_url")
-
-                newProduct = Product(
-                    name=name,
-                    price=price,
-                    stock=stock,
-                    category=category,
-                    image_url=image,
-                )
-                newProduct.save()
-                messages.add_message(
-                    request=request,
-                    level=messages.SUCCESS,
-                    message="Product added successfully",
-                )
-                context = {"products": Product.objects.all()}
-                return render(request, "shop.html", context)
-    elif request.method == "POST" and request.POST.get("type") == "About":
-        if request.POST.get("action") == "update":
-            about = About.objects.get(id=id)
-            form = AboutForm(request.POST)
-            if form.is_valid():
-                about.first_name = form.cleaned_data.get("first_name")
-                about.last_name = form.cleaned_data.get("last_name")
-                about.position = form.cleaned_data.get("position")
-                about.description = form.cleaned_data.get("description")
-                about.image_url = form.cleaned_data.get("image_url")
-
-                about.save()
-                messages.add_message(
-                    request=request,
-                    level=messages.SUCCESS,
-                    message="Personal update successfully",
-                )
-                team = About.objects.all()
-                testimonial = Testimonial.objects.all()
-                context = {"teams": team, "testimonials": testimonial}
-                return render(request, "about.html", context)
-        else:
-            form = AboutForm(request.POST)
-            if form.is_valid():
-                first_name = form.cleaned_data.get("first_name")
-                last_name = form.cleaned_data.get("last_name")
-                position = form.cleaned_data.get("position")
-                description = form.cleaned_data.get("description")
-                image = form.cleaned_data.get("image_url")
-
-                newAbout = About(
-                    first_name=first_name,
-                    last_name=last_name,
-                    position=position,
-                    description=description,
-                    image_url=image,
-                )
-                newAbout.save()
-                messages.add_message(
-                    request=request,
-                    level=messages.SUCCESS,
-                    message="Personal added successfully",
-                )
-                team = About.objects.all()
-                testimonial = Testimonial.objects.all()
-                context = {"teams": team, "testimonials": testimonial}
-                return render(request, "about.html", context)
-    elif request.method == "POST" and request.POST.get("type") == "Testimonial":
-        if request.POST.get("action") == "update":
-            testimonial = Testimonial.objects.get(id=id)
-            form = TestimonialForm(request.POST)
-            if form.is_valid():
-                testimonial.first_name = form.cleaned_data.get("first_name")
-                testimonial.last_name = form.cleaned_data.get("last_name")
-                testimonial.position = form.cleaned_data.get("position")
-                testimonial.testimonial = form.cleaned_data.get("testimonial")
-                testimonial.image_url = form.cleaned_data.get("image_url")
-
-                testimonial.save()
-                messages.add_message(
-                    request=request,
-                    level=messages.SUCCESS,
-                    message="Testimonial update successfully",
-                )
-                team = About.objects.all()
-                testimonial = Testimonial.objects.all()
-                context = {"teams": team, "testimonials": testimonial}
-                return render(request, "about.html", context)
-        else:
-            form = TestimonialForm(request.POST)
-            if form.is_valid():
-                first_name = form.cleaned_data.get("first_name")
-                last_name = form.cleaned_data.get("last_name")
-                position = form.cleaned_data.get("position")
-                testimonial = form.cleaned_data.get("testimonial")
-                image = form.cleaned_data.get("image_url")
-
-                newTestimonial = Testimonial(
-                    first_name=first_name,
-                    last_name=last_name,
-                    position=position,
-                    testimonial=testimonial,
-                    image_url=image,
-                )
-                newTestimonial.save()
-                messages.add_message(
-                    request=request,
-                    level=messages.SUCCESS,
-                    message="Testimonial added successfully",
-                )
-                team = About.objects.all()
-                testimonial = Testimonial.objects.all()
-                context = {"teams": team, "testimonials": testimonial}
-                return render(request, "about.html", context)
-    else:
-        context = {}
-        if type == "product":
-            if action == "update":
-                product = Product.objects.get(id=id)
-                context = {
-                    "formProduct": ProductForm(
-                        initial={
-                            "name": product.name,
-                            "price": product.price,
-                            "stock": product.stock,
-                            "category": product.category,
-                            "image_url": product.image_url,
-                        }
-                    ),
-                    "action": "update",
-                }
-            else:
-                context = {"formProduct": ProductForm()}
-
-        if type == "about":
-            if action == "update":
-                about = About.objects.get(id=id)
-                context = {
-                    "formAbout": AboutForm(
-                        initial={
-                            "first_name": about.first_name,
-                            "last_name": about.last_name,
-                            "position": about.position,
-                            "description": about.description,
-                            "image_url": about.image_url,
-                        }
-                    ),
-                    "action": "update",
-                }
-                print(context)
-            else:
-                context = {"formAbout": AboutForm()}
-
-        if type == "testimonial":
-            if action == "update":
-                testimonial = Testimonial.objects.get(id=id)
-                context = {
-                    "formTestimonial": TestimonialForm(
-                        initial={
-                            "first_name": testimonial.first_name,
-                            "last_name": testimonial.last_name,
-                            "position": testimonial.position,
-                            "testimonial": testimonial.testimonial,
-                            "image_url": testimonial.image_url,
-                        }
-                    ),
-                    "action": "update",
-                }
-            else:
-                context = {"formTestimonial": TestimonialForm()}
-
-        return render(
-            request,
-            "forms.html",
-            context,
-        )
 
 
 @login_required
@@ -362,35 +171,25 @@ def delete(request, type, id):
             )
 
 
-class Services(TemplateView):
-    template_name = "services.html"
+# CUSTOM MIDDLEWARE
 
-    def get_context_data(self, **kwargs):
-        context = super(Services, self).get_context_data(**kwargs)
-        context["products"] = Product.objects.all()
-        context["abouts"] = About.objects.all()
-        context["testimonials"] = Testimonial.objects.all()
-        return context
-
-
-# PRODUCTS
 
 class CustomLoginRequiredMixin(LoginRequiredMixin):
     def dispatch(self, request, *args, **kwargs):
         user = request.user
         if not user.is_authenticated:
-                messages.warning(request, 'You must be logged in to view this page')
-                return self.handle_no_permission()
-        return super(CustomLoginRequiredMixin, self).dispatch(
-            request, *args, **kwargs
-        )
+            messages.warning(request, "You must be logged in to view this page")
+            return self.handle_no_permission()
+        return super(CustomLoginRequiredMixin, self).dispatch(request, *args, **kwargs)
+
+
+# PRODUCTS
 
 
 class Products(CustomLoginRequiredMixin, ListView):
     model = Product
     template_name = "products.html"
-    permission_denied_message = 'You are not authorized to view this page'
-
+    permission_denied_message = "You are not authorized to view this page"
 
 
 class ProductCreate(CustomLoginRequiredMixin, CreateView):
@@ -401,7 +200,7 @@ class ProductCreate(CustomLoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["product"] = "create"
+        context["product"] = "Add"
         return context
 
     def form_valid(self, form):
@@ -417,7 +216,7 @@ class ProductUpdate(CustomLoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["product"] = "update"
+        context["product"] = "Update"
         return context
 
     def form_valid(self, form):
@@ -432,7 +231,7 @@ class ProductDelete(CustomLoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["product"] = "delete"
+        context["product"] = "Delete"
         return context
 
     def form_valid(self, form):
@@ -456,7 +255,7 @@ class AboutCreate(CustomLoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["about"] = "create"
+        context["about"] = "Add"
         return context
 
     def form_valid(self, form):
@@ -472,7 +271,7 @@ class AboutUpdate(CustomLoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["about"] = "update"
+        context["about"] = "Update"
         return context
 
     def form_valid(self, form):
@@ -487,7 +286,7 @@ class AboutDelete(CustomLoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["about"] = "delete"
+        context["about"] = "Delete"
         return context
 
     def form_valid(self, form):
@@ -511,7 +310,7 @@ class TestimonialCreate(CustomLoginRequiredMixin, CreateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["testimonial"] = "create"
+        context["testimonial"] = "Add"
         return context
 
     def form_valid(self, form):
@@ -527,7 +326,7 @@ class TestimonialUpdate(CustomLoginRequiredMixin, UpdateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["testimonial"] = "update"
+        context["testimonial"] = "Update"
         return context
 
     def form_valid(self, form):
@@ -542,11 +341,66 @@ class TestimonialDelete(CustomLoginRequiredMixin, DeleteView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["testimonial"] = "delete"
+        context["testimonial"] = "Delete"
         return context
 
     def form_valid(self, form):
         messages.success(self.request, "Testimonial deleted successfully")
+        return super().form_valid(form)
+
+
+# SERVICES
+
+
+class Services(CustomLoginRequiredMixin, ListView):
+    model = Service
+    template_name = "services.html"
+
+
+class ServiceCreate(CustomLoginRequiredMixin, CreateView):
+    model = Service
+    form_class = ServiceForm
+    template_name = "forms.html"
+    success_url = reverse_lazy("services")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["service"] = "Add"
+        return context
+
+    def form_valid(self, form):
+        messages.success(self.request, "Service created successfully")
+        return super().form_valid(form)
+
+
+class ServiceUpdate(CustomLoginRequiredMixin, UpdateView):
+    model = Service
+    form_class = ServiceForm
+    template_name = "forms.html"
+    success_url = reverse_lazy("services")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["service"] = "Update"
+        return context
+
+    def form_valid(self, form):
+        messages.success(self.request, "Service updated successfully")
+        return super().form_valid(form)
+
+
+class ServiceDelete(CustomLoginRequiredMixin, DeleteView):
+    model = Service
+    template_name = "delete.html"
+    success_url = reverse_lazy("services")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["service"] = "Delete"
+        return context
+
+    def form_valid(self, form):
+        messages.success(self.request, "Service deleted successfully")
         return super().form_valid(form)
 
 
@@ -560,6 +414,14 @@ def login_view(request):
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
+
+            try:
+                avatar = Avatar.objects.get(user=request.user.id).image.url
+            except:
+                avatar = "/media/avatars/default.png"
+            finally:
+                request.session["avatar"] = avatar
+
             return render(request, "index.html")
         else:
             messages.warning(request, "Invalid Credentials")
@@ -604,6 +466,7 @@ def register(request):
 
 # ERORR PAGES
 
+
 class Error404(TemplateView):
     template_name = "404.html"
 
@@ -612,17 +475,84 @@ class Error404(TemplateView):
         context["title"] = "Page Not Found"
         return context
 
-def blog(request):
-    return render(request, "blog.html")
+
+# EDIT PROFILE
+
+
+@login_required
+def profile(request):
+    is_user = request.user
+    if request.method == "POST":
+        form = ProfileForm(request.POST)
+        if form.is_valid():
+            user = User.objects.get(username=is_user)
+            user.email = form.cleaned_data.get("email")
+            user.first_name = form.cleaned_data.get("first_name")
+            user.last_name = form.cleaned_data.get("last_name")
+            user.save()
+            messages.success(request, "Profile updated successfully")
+            return redirect(reverse_lazy("profile"))
+    else:
+        form = ProfileForm(instance=is_user)
+        username = is_user.username
+    return render(request, "profile.html", {"form": form, "username": username})
+
+
+class ChangePasswordView(CustomLoginRequiredMixin, PasswordChangeView):
+    template_name = "change_password.html"
+    success_url = reverse_lazy("profile")
+    form_class = MyPasswordChangeForm
+
+    def form_valid(self, form):
+        messages.success(self.request, "Change password successfully")
+        return super().form_valid(form)
+
+    def form_invalid(self, form):
+        messages.warning(self.request, "Change password failed")
+        return super().form_invalid(form)
+
+
+@login_required
+def avatar_change(request):
+    is_user = request.user
+    if request.method == "POST":
+        form = AvatarForm(request.POST, request.FILES)
+        if form.is_valid():
+            user = User.objects.get(username=is_user)
+            avatar_old = Avatar.objects.filter(user=is_user)
+            if len(avatar_old) > 0:
+                for i in range(len(avatar_old)):
+                    avatar_old[i].delete()
+
+            avatar = Avatar(user=user, image=form.cleaned_data.get("image"))
+            avatar.save()
+
+            image = Avatar.objects.get(user=is_user).image.url
+            request.session["avatar"] = image
+
+            messages.success(request, "Avatar updated successfully")
+            return redirect(reverse_lazy("profile"))
+    else:
+        form = AvatarForm()
+    return render(request, "avatar.html", {"form": form})
+
+
+# CONTACT
 
 
 def contact(request):
     return render(request, "contact.html")
 
 
+# CART
+
+
 @login_required
 def cart(request):
     return render(request, "cart.html")
+
+
+# CHECKOUT
 
 
 @login_required

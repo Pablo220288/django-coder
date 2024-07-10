@@ -38,6 +38,19 @@ class TestimonialAdmin(admin.ModelAdmin):
         return format_html("{} {}", obj.first_name, obj.last_name)
 
 
+class ServiceAdmin(admin.ModelAdmin):
+    list_display = (
+        "icon",
+        "title",
+    )
+
+    def icon(self, obj):
+        return format_html(
+            '<img src="/models/static/images/{}" width="30" />', obj.icon_url
+        )
+
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(About, AboutAdmin)
 admin.site.register(Testimonial, TestimonialAdmin)
+admin.site.register(Service, ServiceAdmin)
