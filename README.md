@@ -20,20 +20,42 @@
 
 # Introducción
 
-Bienvenido a nuestro ecommerce, un proyecto que utiliza Django para crear una tienda en línea. En este README, te proporcionamos información sobre cómo utilizar nuestro ecommerce y cómo contribuir al proyecto.
+Bienvenido a FURNI, un proyecto que utiliza Django para crear una tienda en línea.
 
-## 🚀 **Instalación** 
+En este README, te proporcionamos información sobre cómo utilizar nuestro ecommerce y cómo contribuir al proyecto.
+
+Te dejo un video que explica el funcionamiento de la web: [Video explicativo FURNI](https://youtu.be/sUtiwfZorfs)
+
+Se crearon cuatro modelos (Product, About, Testimonial y Services) que nos permiten tener control sobre la info d ela web. Es podibre agergar, modificar y eliminar los elementos.
+
+Para esta gestion es necesario hacer Login en la misma. Te porporciono un Usuario y una Contraseña para que puedas probar al maximo mi web:
+
+Usuario:
+
+```bash
+superadmin
+```
+
+Contraseña:
+
+```bash
+Coder@1234
+```
+
+Espero que disfrutes de mi proyecto.
+
+## 🚀 **Instalación**
 
 Para instalar nuestro ecommerce, necesitarás tener Python y Django instalados en tu máquina local. Puedes seguir los siguientes pasos para instalarlos:
 
-* Instala Python desde el sitio web oficial de Python.
-* Instala Django utilizando pip:
+- Instala Python desde el sitio web oficial de Python.
+- Instala Django utilizando pip:
 
 ```bash
 $ pip install django
 ```
 
-## ⚙️ **Configuración** 
+## ⚙️ **Configuración**
 
 Para configurar nuestro ecommerce, necesitarás crear un archivo `settings.py` en la raíz del proyecto. En este archivo, puedes configurar variables como la base de datos, la ruta de la tienda y la configuración de seguridad.
 
@@ -41,23 +63,25 @@ Para configurar nuestro ecommerce, necesitarás crear un archivo `settings.py` e
 
 Para utilizar nuestro ecommerce, puedes seguir los siguientes pasos:
 
-* Clona el repositorio con el comando:
+- Clona el repositorio con el comando:
 
 ```bash
 $ git clone https://github.com/Pablo220288/django-coder.git
 ```
-* Instala las dependencias con el comando:
+
+- Instala las dependencias con el comando:
 
 ```bash
 $ pip install -r requirements.txt
 ```
-* Inicia el servidor de desarrollo:
+
+- Inicia el servidor de desarrollo:
 
 ```bash
 $ python manage.py runserver
 ```
 
-* Accede a la tienda en tu navegador:
+- Accede a la tienda en tu navegador:
 
 ```bash
 $ http://127.0.0.1:8000/
@@ -67,47 +91,50 @@ $ http://127.0.0.1:8000/
 
 Si deseas contribuir al proyecto, por favor, sigue los siguientes pasos:
 
-* Clona el repositorio con el comando:
+- Clona el repositorio con el comando:
 
 ```bash
 $ git clone https://github.com/Pablo220288/django-coder.git
 ```
 
-* Crea un branch para tu feature o bugfix con:
+- Crea un branch para tu feature o bugfix con:
 
 ```bash
 $ git checkout -b <nombre-del-branch>
 ```
 
-* Realiza tus cambios y haz un commit con:
+- Realiza tus cambios y haz un commit con:
 
 ```bash
 $ git commit -m "<mensaje-de-commit>
 ```
 
-* Envía tus cambios al repositorio con:
+- Envía tus cambios al repositorio con:
 
 ```bash
 $ git push origin <nombre-del-branch>
 ```
 
-* Crea un pull request para que los desarrolladores del proyecto puedan revisar y aprobar tus cambios
+- Crea un pull request para que los desarrolladores del proyecto puedan revisar y aprobar tus cambios.
 
 ## ✒️ **Autores**
 
-* Pablo Hernandez
+- Pablo Hernandez.
 
 ## 🤓 **Agradecimientos**
 
-* Coder House
-* Norman Beltran
+- Coder House
+- Norman Beltran
 
 ## 📢 **Contacto**
 
 Si tienes alguna pregunta o necesitas ayuda, por favor, no dudes en contactarnos en [peh7sep@gmail.com](#).
 
+Puedes visitar mi [portafolio](https://pablo220288.github.io/Portafolio_2022/) para ver mas de mis proyectos.
+
 ## 🎁 **Expresiones de Gratitud**
+
 - Comenta a otros sobre este proyecto 📢
-- Invita una cerveza 🍺 o un café ☕ a alguien del equipo.
+- Invitame una cerveza 🍺 o un café ☕.
 - Da las gracias públicamente 🤓.
 - Dona cripto USDT Tron (TRC20) a esta dirección: `TTPa1JXX4RdTdpAnWEPzTv3DQe9YsBfve4`

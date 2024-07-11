@@ -57,22 +57,6 @@ def about(request):
     return render(request, "about.html", context)
 
 
-def service(request):
-    products = Product.objects.all()
-    about = About.objects.all()
-    testimonial = Testimonial.objects.all()
-
-    return render(
-        request,
-        "services.html",
-        {
-            "products": products,
-            "abouts": about,
-            "testimonials": testimonial,
-        },
-    )
-
-
 @login_required
 def delete(request, type, id):
 
@@ -408,6 +392,8 @@ class ServiceDelete(CustomLoginRequiredMixin, DeleteView):
 
 
 def login_view(request):
+    if "next" in request.GET:
+        messages.warning(request, "You must be logged in to access this page")
     if request.method == "POST":
         username = request.POST.get("username")
         password = request.POST.get("password")
@@ -558,3 +544,10 @@ def cart(request):
 @login_required
 def checkout(request):
     return render(request, "checkout.html")
+
+
+# ABOUT ME
+
+
+def about_me(request):
+    return render(request, "about_me.html")

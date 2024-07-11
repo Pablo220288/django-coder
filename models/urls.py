@@ -59,6 +59,8 @@ urlpatterns = [
     # Cart
     path("cart/", cart, name="cart"),
     path("checkout/", checkout, name="checkout"),
+    # About me
+    path("about-me/", about_me, name="aboutMe"),
 ]
 
 handler404 = Error404.as_view()

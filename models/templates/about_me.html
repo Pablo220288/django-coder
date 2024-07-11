@@ -1,0 +1,80 @@
+
+{% extends 'index.html' %} 
+
+{% block static %} 
+	{% load static %} 
+{% endblock static %} 
+
+{% block titleanddescription %} 
+	<title>Furni About Me</title>
+	<meta name="description" content="" />
+{% endblock titleanddescription %}
+
+{% block nav %}
+  <li><a class="nav-link" href="{% url 'home' %}">Home</a></li>
+  <li><a class="nav-link" href="{% url 'shop' %}">Shop</a></li>
+  <li><a class="nav-link" href="{% url 'about' %}">About us</a></li>
+
+  {% if user.is_authenticated %}
+    <li><a class="nav-link" href="{% url 'products' %}">Products</a></li>
+    <li><a class="nav-link" href="{% url 'abouts' %}">Abouts</a></li>
+    <li><a class="nav-link" href="{% url 'testimonials' %}">Testimonials</a></li>
+    <li><a class="nav-link" href="{% url 'services' %}">Services</a></li>
+  {% endif %}
+
+  <li><a class="nav-link" href="{% url 'contact' %}">Contact us</a></li>
+
+{% endblock nav %} 
+
+{% block hero %}
+
+{% endblock hero %} 
+
+{% block content %}
+	<!-- Start Why Choose Us Section -->
+	<div class="untree_co-section">
+		<div class="container">
+	  	<div class="block">
+        <div class="row justify-content-center mb-5">
+          <div class="col-md-8 col-lg-8 pb-4">
+				    <div class="col-md-8 col-lg-8 pb-4">
+					    <div class="row mb-4">
+                <div class="group-avatar">
+                  <img class="img-avatar-profile" src="{% static 'images/pabloHernandez.jpg' %}" alt="avatar profile" />
+                  <h2 class="section-title">Pablo Hernandez.</h2>
+                </div>
+					    </div>
+              <form method="post">
+                {% csrf_token %}
+                <div class="row align-end">
+                  <div class="col-12">
+                    <div class="form-group">
+                      <div class="form-group">
+                        <p>Hola.! Mi nombre es Pablo, tengo 36 años y soy Estudiante de programación.</p>
+                        <p>Curse la carrera de Full Stack Web Development en Coderhouse y eso para mí fue el inicio de mi carrera.</p>
+                        <p>Es un sueño cumplido. Pero sé que en esto no hay techo, por lo que sigo buscando aprender y ampliar mi conocimiento.</p>
+                        <p>Hoy me encuentro llegando al final de mi cursada en Python. Me encanto este lenguaje y se que pronto podre ponerlo a trabajar en mis proyectos.</p>
+                        <p>Dejo el Link a mi <a target="_blank" href="https://pablo220288.github.io/Portafolio_2022/">Portafolio</a> para que puedan ver mis trabajos.</p>
+                        <p>Espero les guste mi trabajo.</p>
+                        <p>Saludos y Gracias.</p>
+                        <span class="footerDisen">
+                          <a
+                            href="https://pablo220288.github.io/Portafolio_2022/"
+                            class="pablo"
+                            target="_blank"
+                          >
+                            Pablo Hernandez
+                          </a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+				    </div>
+          </div>
+        </div>
+			</div>
+	  </div>
+	</div>
+	<!-- End Why Choose Us Section -->
+{% endblock content %}
