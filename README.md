@@ -20,6 +20,8 @@
 
 # Introducción
 
+Pablo Hernández - Comisión 57810
+
 Bienvenido a FURNI, un proyecto que utiliza Django para crear una tienda en línea.
 
 En este README, te proporcionamos información sobre cómo utilizar nuestro ecommerce y cómo contribuir al proyecto.
