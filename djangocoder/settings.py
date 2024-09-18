@@ -87,10 +87,21 @@ WSGI_APPLICATION = "djangocoder.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+""" DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "djangocoder.db",
+    }
+} """
+
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "postgres",
+        "USER": "postgres.nktokuygwfaflafqjeur",
+        "PASSWORD": "a1b2c3d4e5f6g7h8i9j0",
+        "HOST": "aws-0-sa-east-1.pooler.supabase.com",
+        "PORT": "6543",
     }
 }
 
